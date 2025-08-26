@@ -1,7 +1,7 @@
 public class MascotaVirtual {
 	/* ATRIBUTOS */
-	final private int MAX_ENERGIA = 100;
-	final private int MIN_ENERGIA = 0;
+	final private int VALOR_MAX = 100;
+	final private int VALOR_MIN = 0;
 	
 	private String nombre;
 	private boolean dormido;
@@ -26,52 +26,29 @@ public class MascotaVirtual {
 		this.canComer = canComer;
 	}
 
-
-	/* SETTER */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	
-	public void setDormido(boolean dormido) {
-		this.dormido = dormido;
-	}
-	
-	public void setEnergia(double energia) {
-		this.energia = energia;
-	}
-	
-	public void setCanDesgaste(int canDesgaste) {
-		this.canDesgaste = canDesgaste;
-	}
-	
-	public void setCanComer(int canComer) {
-		this.canComer = canComer;
-	}
-	
-
-	/* GETTER */
-	public String getNombre() {
-		return nombre;
+	/* METODOS */
+	public String mostrarNombre() {
+		return this.nombre;
 	}
 
-	public boolean getDormido() {
-		if (this.energia<=MIN_ENERGIA)
+	public boolean estaDormido() {
+		if (this.energia<=VALOR_MIN)
 			this.dormido = true;
 		return this.dormido;
 	}
 
-	public double getEnergia() {
-		if (this.energia>MAX_ENERGIA)
-			this.energia = MAX_ENERGIA;
-		if (this.energia<=MIN_ENERGIA){
-			this.energia = MIN_ENERGIA;
+	public double nivelEnergia() {
+		if (this.energia>VALOR_MAX)
+			this.energia = VALOR_MAX;
+		if (this.energia<=VALOR_MIN){
+			this.energia = VALOR_MIN;
 			this.canDesgaste = 0;
 		}
 		return this.energia;
 	}
 
-	public int getHumor(){
-		double pivot = getEnergia();
+	public int gradoHumor(){
+		double pivot = nivelEnergia();
 		if (pivot>0 && pivot<=20)
 				return 1;
 		if (pivot>=21 && pivot<=40)
@@ -86,21 +63,21 @@ public class MascotaVirtual {
 			return 0;
 	}
 
-	public int getCanDesgaste() {
+	public int nivelDesgaste() {
 		if (this.canDesgaste==3){
 			this.dormido = true;
 		}
 		return this.canDesgaste;
 	}
 
-	public int getCanComer() {
-		if (this.canComer<=MIN_ENERGIA)
-			this.canComer = MIN_ENERGIA;
+	public int nivelIngesta() {
+		if (this.canComer<=VALOR_MIN)
+			this.canComer = VALOR_MIN;
 		return this.canComer;
 	}
 
-	public boolean getVivo(){
-		if (this.energia<=MIN_ENERGIA){
+	public boolean estaVivo(){
+		if (this.energia<=VALOR_MIN){
 			return false;
 		}
 		return true;
@@ -112,7 +89,7 @@ public class MascotaVirtual {
 		if (this.canComer == 5) {
 			this.energia = 0;
 		}
-		if (this.energia<=MAX_ENERGIA && this.energia>MIN_ENERGIA && this.dormido == false){
+		if (this.energia<=VALOR_MAX && this.energia>VALOR_MIN && this.dormido == false){
 			this.energia = this.energia + 15;
 			this.canComer = this.canComer + 1;
 		}
@@ -123,7 +100,7 @@ public class MascotaVirtual {
 		if (this.canComer == 5) {
 			this.energia = 0;
 		}
-		if (this.energia<=MAX_ENERGIA && this.energia>MIN_ENERGIA && this.dormido == false){
+		if (this.energia<=VALOR_MAX && this.energia>VALOR_MIN && this.dormido == false){
 			this.energia = this.energia + 30;
 			this.canComer = this.canComer + 1;
 		}
@@ -135,19 +112,17 @@ public class MascotaVirtual {
 		return this.dormido;
 	}
 	public boolean despertar() {
-		if (this.dormido == true && getVivo()==true){
+		if (this.dormido == true && estaVivo()==true){
 			this.energia = this.energia + this.energia*0.25;
 			this.dormido = false;
-			if (this.canDesgaste<=3 && this.canComer<=5){
-				this.canDesgaste = 0;
-				this.canComer = 0;
-			}
+			this.canDesgaste = 0;
+			this.canComer = 0;
 		}
 		return this.dormido;
 	}
 	// ---vv
 	public boolean caminar() {
-		if (getDormido()==false){
+		if (estaDormido()==false){
 			this.energia = this.energia - 15;
 			this.canDesgaste += 1;
 			this.canComer -=1;
@@ -157,7 +132,7 @@ public class MascotaVirtual {
 	}
 
 	public boolean correr() {
-		if (getDormido()==false){
+		if (estaDormido()==false){
 			this.energia = this.energia - this.energia*0.50;
 			this.canDesgaste += 1;
 			this.canComer -=1;
@@ -166,7 +141,7 @@ public class MascotaVirtual {
 	}
 
 	public boolean saltar() {
-		if (getDormido()==false){
+		if (estaDormido()==false){
 			this.energia = this.energia - 5;
 			this.canDesgaste += 1;
 			this.canComer -=1;
@@ -177,14 +152,14 @@ public class MascotaVirtual {
 	
 
 	public void MostrarMascota() {
-		System.out.println("> Me llamo: " + this.nombre);
-		System.out.print("> Estoy vivo: " + getVivo());
-		System.out.println( (getVivo()==true)?" (^w^) SI!!...":" (-_-) MORI...");
-		System.out.println("> Estoy durmiendo: " + getDormido());
-		System.out.println("   _ Nivel de energia: " + getEnergia() + "%");
-		System.out.println("   _ Nivel de humor: " + getHumor());
-		System.out.println("   _ Desgaste max(3): " + getCanDesgaste());
-		System.out.println("   _ Ingesta max(5): " + getCanComer());
+		System.out.print("> Me llamo: " + mostrarNombre() + "   ");
+		System.out.println( (estaVivo()==true)?" (^w^) SI!!...":" (-_-) MORI...");
+		System.out.println("> Estoy vivo: " + estaVivo());
+		System.out.println("> Estoy durmiendo: " + estaDormido());
+		System.out.println("   _ Nivel de energia: " + nivelEnergia() + "%");
+		System.out.println("   _ Nivel de humor: " + gradoHumor());
+		System.out.println("   _ Desgaste max(3): " + nivelDesgaste());
+		System.out.println("   _ Ingesta max(5): " + nivelIngesta());
 	}	
 	
 }

@@ -8,7 +8,8 @@ public class Tester {
 		System.out.print("Hola!!, ponme un nombre: ");
 		String name = scan.nextLine();
 		MascotaVirtual mascota1 = new MascotaVirtual(name);
-		int opcion;
+		String opcion, continuar;
+		boolean bandera = true;
 
 	        do {
 				LimpiarPantalla.limpiar();
@@ -24,39 +25,68 @@ public class Tester {
 	            System.out.println("---\n0. Salir");
 
 	            System.out.print("Elige una acción: ");
-	            opcion = scan.nextInt();
+	            opcion = scan.nextLine();
 
 	            switch (opcion) {
-	                case 1:
+	                case "1":
 	                    mascota1.comer();
 	                    break;
-	                case 2:
+	                case "2":
 	                    mascota1.beber();
 	                    break;
-	                case 3:
+	                case "3":
 	                    mascota1.dormir();
 	                    break;
-	                case 4:
+	                case "4":
 	                    mascota1.despertar();
 	                    break;
-	                case 5:
+	                case "5":
 	                    mascota1.caminar();
 	                    break;
-	                case 6:
+	                case "6":
 	                    mascota1.correr();
 	                    break;
-	                case 7:
+	                case "7":
 	                   	mascota1.saltar();
 	                   	break;
-	                case 0:
+	                case "0":
 	                    System.out.println("¡Adiós!");
+	                    bandera = false;
 	                    break;
 	                default:
 	                    System.out.println("Opción no válida.");
 	            }
-	        } while (opcion != 0);
+	            System.out.println("> Cambio a realizar en el estado: ");
+	            switch(medidorEnergetico(opcion)){
+	            	case 1:
+	                    System.out.println("  * [+]Energia | [+]Ingesta  ");
+	                    break;
+	                case 2:
+	                    System.out.println("  * [+]Desgaste | [-]Energia | [-]Ingesta  ");
+	                    break;
+	                case 3:
+	                    System.out.println("  * [0]Desgaste | [+]Energia | [0]Ingesta  ");
+	                    break;
+	                default:
+	                    System.out.println("  * Durmiendo");
+	            }
+	            if (bandera!=false){
+	            	System.out.print("Pulse enter para continuar..");
+	            	continuar = scan.nextLine();
+	            }
+	        } while (bandera!=false);
 
 	        scan.close();
 	}
 
+	public static int medidorEnergetico(String opcion){
+		if (opcion.equals("1") || opcion.equals("2"))
+			return 1;
+		if (opcion.equals("5") || opcion.equals("6") || opcion.equals("7"))
+			return 2;
+		if (opcion.equals("4"))
+			return 3;
+		else 
+			return 4;
+	}
 }

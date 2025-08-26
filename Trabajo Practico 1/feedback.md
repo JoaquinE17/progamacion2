@@ -46,3 +46,6 @@ Entre 21 y 40 (2)
 Entre 41 y 60 (3)
 Entre 61 y 80 (4)
 Entre 81 y 100 (5)
+
+[.] Eliminar `if` innecesarios.
+[x] Renombrar constantes, para ser mas legible el codigo.  
