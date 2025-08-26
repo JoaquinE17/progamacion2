@@ -1,48 +1,53 @@
-package Tp1;
-
 import java.util.Scanner;
+import utilidades.LimpiarPantalla;
 
 public class Tester {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		MascotaVirtual mascota1 = new MascotaVirtual("pepe", false, 50, 3, 0);
-		//mascota1.Beber();
-		//System.out.println("esta bebiendo: " + mascota1.getEnergia());
-		 int opcion;
+		System.out.print("Hola!!, ponme un nombre: ");
+		String name = scan.nextLine();
+		MascotaVirtual mascota1 = new MascotaVirtual(name);
+		int opcion;
 
 	        do {
+				LimpiarPantalla.limpiar();
 	        	mascota1.MostrarMascota();
-	            System.out.println("\n--- Menú de acciones ---");
-	            System.out.println("1. Caminar");
-	            System.out.println("2. Dormir");
-	            System.out.println("3. Saltar");
-	            System.out.println("4. Comer");
-	            System.out.println("5. Beber");
-	            System.out.println("6. Correr");
-	            System.out.println("0. Salir");
+	            System.out.println("\n------ Menú de acciones ------");
+	            System.out.println(" 1. Comer\t 5. Caminar");
+
+	            System.out.println(" 2. Beber\t 6. Correr");
+
+	            System.out.println(" 3. Dormir\t 7. Saltar");
+	            System.out.println(" 4. Despertar");
+
+	            System.out.println("---\n0. Salir");
+
 	            System.out.print("Elige una acción: ");
 	            opcion = scan.nextInt();
 
 	            switch (opcion) {
 	                case 1:
-	                    mascota1.Caminar();
+	                    mascota1.comer();
 	                    break;
 	                case 2:
-	                    mascota1.Dormir();
+	                    mascota1.beber();
 	                    break;
 	                case 3:
-	                    mascota1.Saltar();
+	                    mascota1.dormir();
 	                    break;
 	                case 4:
-	                    mascota1.Comer();
+	                    mascota1.despertar();
 	                    break;
 	                case 5:
-	                    mascota1.Beber();
+	                    mascota1.caminar();
 	                    break;
 	                case 6:
-	                    mascota1.Correr();
+	                    mascota1.correr();
 	                    break;
+	                case 7:
+	                   	mascota1.saltar();
+	                   	break;
 	                case 0:
 	                    System.out.println("¡Adiós!");
 	                    break;
