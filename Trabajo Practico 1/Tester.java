@@ -2,29 +2,28 @@ import java.util.Scanner;
 import utilidades.LimpiarPantalla;
 
 public class Tester {
-
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		System.out.print("Hola!!, ponme un nombre: ");
-		String name = scan.nextLine();
-		MascotaVirtual mascota1 = new MascotaVirtual(name);
-		String opcion, continuar;
+		//System.out.print("Hola!!, ponme un nombre: ");
+		//String name = scan.nextLine();
+		MascotaVirtual mascota1 = new MascotaVirtual("Tuki2.0");
+		String opcion;
 		boolean bandera = true;
-
 	        do {
 				LimpiarPantalla.limpiar();
+				System.out.println("------- MascotaVirtual -------");
 	        	mascota1.MostrarMascota();
+	        	
 	            System.out.println("\n------ Menú de acciones ------");
 	            System.out.println(" 1. Comer\t 5. Caminar");
 
 	            System.out.println(" 2. Beber\t 6. Correr");
 
 	            System.out.println(" 3. Dormir\t 7. Saltar");
-	            System.out.println(" 4. Despertar");
+	            System.out.println(" 4. Despertar\t 8. Ver reglas");
 
-	            System.out.println("---\n0. Salir");
-
-	            System.out.print("Elige una acción: ");
+	            System.out.println("--------\n0. Salir");
+	            System.out.print("----------------\nElige una acción: ");
 	            opcion = scan.nextLine();
 
 	            switch (opcion) {
@@ -49,44 +48,37 @@ public class Tester {
 	                case "7":
 	                   	mascota1.saltar();
 	                   	break;
+	                case "8":
+	                	reglas();
+	                   	break;
 	                case "0":
 	                    System.out.println("¡Adiós!");
 	                    bandera = false;
 	                    break;
 	                default:
-	                    System.out.println("Opción no válida.");
+	                    System.out.print("Opción no válida. Continuar...");
+	                    String seguir = scan.nextLine();
 	            }
-	            System.out.println("> Cambio a realizar en el estado: ");
-	            switch(medidorEnergetico(opcion)){
-	            	case 1:
-	                    System.out.println("  * [+]Energia | [+]Ingesta  ");
-	                    break;
-	                case 2:
-	                    System.out.println("  * [+]Desgaste | [-]Energia | [-]Ingesta  ");
-	                    break;
-	                case 3:
-	                    System.out.println("  * [0]Desgaste | [+]Energia | [0]Ingesta  ");
-	                    break;
-	                default:
-	                    System.out.println("  * Durmiendo");
-	            }
-	            if (bandera!=false){
-	            	System.out.print("Pulse enter para continuar..");
-	            	continuar = scan.nextLine();
-	            }
+	            
 	        } while (bandera!=false);
 
 	        scan.close();
 	}
 
-	public static int medidorEnergetico(String opcion){
-		if (opcion.equals("1") || opcion.equals("2"))
-			return 1;
-		if (opcion.equals("5") || opcion.equals("6") || opcion.equals("7"))
-			return 2;
-		if (opcion.equals("4"))
-			return 3;
-		else 
-			return 4;
+	public static void reglas(){
+		Scanner scan = new Scanner(System.in);
+		System.out.println("\n------ Reglas del juego ------");		
+		System.out.println("1- Nivel de Energia maximo 100.");
+		System.out.println("2- Nivel de Energia minimo 0.");
+		System.out.println("3- La Energia incrementa (comer,beber,dormir).");
+		System.out.println("4- La Energia disminuye (caminar,correr,saltar).");
+		System.out.println("5- Si Energia llega a 0 la mascota muere.");
+		System.out.println("6- Si Ingesta llega a 5 la mascota muere.");
+		System.out.println("7- La Ingesta disminuye con deporte.");
+		System.out.println("8- Si Desgaste llega a 4 la mascota duerme.");
+		System.out.println("9- Al Despertar Ingesta y Desgaste se resetean.");
+		System.out.println("------------------------------");
+		System.out.print("Pulse enter para volver al menu de acciones:  ");
+		String atras = scan.nextLine();
 	}
 }
