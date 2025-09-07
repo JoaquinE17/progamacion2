@@ -80,7 +80,7 @@ public class MascotaVirtual {
 	}
 
 	public boolean beber() {
-		if (this.canComer == 5){ // Muere de indigestion
+		if (this.canComer == 4){ // Muere de indigestion
 			this.energia = 0;
 			this.canComer=this.canComer+1;
 		}
