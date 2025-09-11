@@ -1,24 +1,24 @@
-package Tp2;
- 
+//package Tp2;
+
 public class Yate extends Barco {
-	private double potenciaCV;
-	private int numeroCamarotes;
-	
-	public Yate(String matricula, double eslora, int anioFabricacion, double potenciaCV,int numeroCamarotes)
-	{
-		super(matricula,eslora,anioFabricacion);
-		this.potenciaCV = potenciaCV;
-		this.numeroCamarotes = numeroCamarotes;
-	}
+    private double potenciaCV;
+    private int numeroCamarotes;
 
-	@Override
-	public double calcularModulo() {
-		// TODO Auto-generated method stub
-		return super.calcularModulo()+potenciaCV+numeroCamarotes;
-	}
+    // Constructor
+    public Yate(String matricula, double metrosEslora, int anioFabricacion, double potenciaCV, int numeroCamarotes) {
+        super(matricula, metrosEslora, anioFabricacion);
+        this.potenciaCV = potenciaCV;
+        this.numeroCamarotes = numeroCamarotes;
+    }
 
-	@Override
-	public String toString() {
-		return "Yate [potenciaCV=" + potenciaCV + ", numeroCamarotes=" + numeroCamarotes + "]";
-	}	
+    // Método calcular módulo sobrescrito
+    @Override
+    public double moduloBarco() {
+        return super.moduloBarco() + potenciaCV + numeroCamarotes;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\n      |_Yate: [potenciaCV: " + potenciaCV + ", numeroCamarotes: " + numeroCamarotes + "]";
+    }
 }

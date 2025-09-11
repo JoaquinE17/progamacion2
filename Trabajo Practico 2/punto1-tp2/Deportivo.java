@@ -1,29 +1,22 @@
-package Tp2;
+//package Tp2;
 
 public class Deportivo extends Barco {
-	private double potenciaCV;
-	
-	public Deportivo(String matricula, double eslora, int anioFabricacion, double potenciaCV)
-	{
-		super(matricula,eslora,anioFabricacion);
-		this.potenciaCV = potenciaCV;
-	}
+    private double potenciaCV;
 
-	@Override
-	public double calcularModulo() {
-		// TODO Auto-generated method stub
-		return super.calcularModulo()+potenciaCV;
-	}
+    // Constructor
+    public Deportivo(String matricula, double metrosEslora, int anioFabricacion, double potenciaCV) {
+        super(matricula, metrosEslora, anioFabricacion); // llamada al constructor de la superclase
+        this.potenciaCV = potenciaCV;
+    }
 
-	@Override
-	public String toString() {
-		return "Deportivo [potenciaCV=" + potenciaCV + "]";
-	}
+    // Método calcular módulo sobrescrito
+    @Override
+    public double moduloBarco() {
+        return super.moduloBarco() + potenciaCV;
+    }
 
-	
-	
-	
-	
-	
-
+    @Override
+    public String toString() {
+        return super.toString() + "\n      |_Deportivo: [potenciaCV: " + potenciaCV + "]";
+    }
 }
